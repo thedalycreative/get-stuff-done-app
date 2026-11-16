@@ -1,4 +1,53 @@
-# GSD App - Get Stuff Done!
+# GSD App — Get Stuff Done
+
+> A beginner-friendly to-do app for learning web development: landing page, a working to-do dashboard with localStorage, demo login/sign-up/contact pages and an Express starter API.
+
+**Live demo:** [get-stuff-done-app-gamma.vercel.app](https://get-stuff-done-app-gamma.vercel.app)
+
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square) ![Bootstrap 5](https://img.shields.io/badge/Bootstrap%205-7952B3?style=flat-square) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square) ![Express](https://img.shields.io/badge/Express-000000?style=flat-square) ![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square)
+
+## Features
+
+- To-do dashboard: add tasks (button or Enter), tick off, delete, filter All / Active / Completed, live totals
+- Tasks persist in the browser with localStorage
+- Landing page plus demo login, sign-up and contact pages
+- `backend/` Express server with a CRUD `/todos` API for the next lesson
+- Every file heavily commented for students
+
+## Tech stack
+
+- HTML5, Bootstrap 5, vanilla JavaScript
+- Node.js + Express (backend starter)
+- Vercel static hosting with clean URLs
+
+## Run it locally
+
+```bash
+git clone https://github.com/thedalycreative/get-stuff-done-app.git
+cd get-stuff-done-app
+npx serve .            # front end → http://localhost:3000
+
+# optional: the Express API
+cd backend && npm install && node script.js   # → http://localhost:3000/todos
+```
+
+## Deployment (Vercel)
+
+Static site — no build step (`vercel.json` sets the repo root as output and turns on clean URLs; `backend/` is not deployed). The Vercel project **get-stuff-done-app** deploys `main` to production at **https://get-stuff-done-app-gamma.vercel.app** — the plain `get-stuff-done-app.vercel.app` address is owned by another Vercel account.
+
+## Screenshots
+
+![GSD App — Get Stuff Done demo](docs/screenshots/demo.gif)
+
+<p align="center">
+  <img src="docs/screenshots/desktop.jpg" alt="Landing page" width="560">
+  <img src="docs/screenshots/dashboard.jpg" alt="To-do dashboard" width="560">
+  <img src="docs/screenshots/mobile.jpg" alt="Landing page on a phone" width="260">
+</p>
+
+_Captured from the live site (https://get-stuff-done-app-gamma.vercel.app). Regenerate with any headless browser; files live in `docs/screenshots/`._
+
+---
 
 A beginner-friendly to-do app project for learning **backend web development**. You already know HTML, CSS, Bootstrap, and basic JavaScript - now it's time to level up!
 
@@ -61,7 +110,9 @@ GSD-APP/
 
 ### Step 3: Make the Dashboard Work
 
-The to-do app dashboard doesn't work yet because some code is **commented out**. Here's how to activate it:
+> **Note:** in this repo the lines below are already uncommented, so the live demo works. In the student starter, they begin commented out — this step walks through switching them on.
+
+In the student starter, the to-do app dashboard doesn't work yet because some code is **commented out**. Here's how to activate it:
 
 1. Open `script.js` in VS Code
 2. Find **Step 3: Event Listeners** (around line 80)
@@ -307,3 +358,7 @@ A: It contains packages (code libraries) that other people wrote. It's created w
 ---
 
 Built in Perth. &copy; 2026 GSD App.
+
+---
+
+Built by [The Daly Creative](https://www.thedalycreative.com) · Perth, WA
