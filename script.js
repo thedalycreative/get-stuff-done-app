@@ -68,6 +68,16 @@ const filterCompletedBtn = document.getElementById('filterCompleted');
 
 let tasks = [];
 
+// Which filter is showing right now ('all', 'active' or 'completed')
+let currentFilter = 'all';
+
+// Turn characters like < and > into safe text so a task can't inject HTML
+function escapeHtml(text) {
+   const div = document.createElement('div');
+   div.textContent = text;
+   return div.innerHTML;
+}
+
 
 /* =============================================
    STEP 3: EVENT LISTENERS
@@ -77,23 +87,25 @@ let tasks = [];
 
    Syntax: element.addEventListener('eventName', functionToRun)
 
-   STUDENT TASK: Uncomment these lines (remove the //) to activate the app!
+   (Student version: these lines started commented out — uncommenting
+   them is what "activates" the app.)
    ============================================= */
 
 // When the "Add Task" button is clicked, run the addTask function
-// addTaskBtn.addEventListener('click', addTask);
+addTaskBtn.addEventListener('click', addTask);
 
 // When the user presses Enter in the input field, run addTask
-// taskInput.addEventListener('keypress', function(e) {
-//    if (e.key === 'Enter') {
-//       addTask();
-//    }
-// });
+taskInput.addEventListener('keydown', function(e) {
+   if (e.key === 'Enter') {
+      e.preventDefault();
+      addTask();
+   }
+});
 
 // When filter buttons are clicked, show filtered tasks
-// filterAllBtn.addEventListener('click', function() { filterTasks('all'); });
-// filterActiveBtn.addEventListener('click', function() { filterTasks('active'); });
-// filterCompletedBtn.addEventListener('click', function() { filterTasks('completed'); });
+filterAllBtn.addEventListener('click', function() { filterTasks('all'); });
+filterActiveBtn.addEventListener('click', function() { filterTasks('active'); });
+filterCompletedBtn.addEventListener('click', function() { filterTasks('completed'); });
 
 
 /* =============================================
@@ -193,7 +205,7 @@ function toggleTask(taskId) {
  *
  * @param {string} filter - "all", "active", or "completed"
  */
-function renderTasks(filter = 'all') {
+function renderTasks(filter = currentFilter) {
    // Clear everything currently in the list
    taskList.innerHTML = '';
 
@@ -231,7 +243,7 @@ function renderTasks(filter = 'all') {
                class="form-check-input me-2"
                ${task.completed ? 'checked' : ''}
                onchange="toggleTask(${task.id})">
-            <span style="${task.completed ? 'text-decoration: line-through; color: #999;' : ''}">${task.text}</span>
+            <span style="${task.completed ? 'text-decoration: line-through; color: #999;' : ''}">${escapeHtml(task.text)}</span>
          </div>
          <button class="btn btn-sm btn-danger" onclick="deleteTask(${task.id})">
             Delete
@@ -323,7 +335,8 @@ function filterTasks(filter) {
       filterCompletedBtn.classList.add('active');
    }
 
-   // Re-render tasks with the selected filter
+   // Remember the filter and re-render tasks with it
+   currentFilter = filter;
    renderTasks(filter);
 }
 
@@ -334,13 +347,14 @@ function filterTasks(filter) {
    DOMContentLoaded fires when the HTML is fully loaded.
    This is where we load saved tasks from localStorage.
 
-   STUDENT TASK: Uncomment these lines to make tasks persist!
+   (Student version: these lines started commented out.)
+   The script is loaded with "defer", so the HTML is already parsed here.
    ============================================= */
 
-// document.addEventListener('DOMContentLoaded', function() {
-//    loadTasks();
-//    filterAllBtn.classList.add('active');
-// });
+loadTasks();
+renderTasks();
+updateStatistics();
+filterAllBtn.classList.add('active');
 
 
 /* =============================================
